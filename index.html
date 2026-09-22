@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superjoy — The world's greatest super agent</title>
+  <meta name="description" content="Hand it the work. Superjoy keeps going until it gives you what you asked for.">
+  <meta name="theme-color" content="#08080a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#08080a; --panel:#101013; --panel2:#0d0910; --border:#202026;
+      --pink:#FF2D78; --pink-lt:#FF6E9E; --body:#8f8f99; --body-hi:#b6b6c2;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Archivo',system-ui,sans-serif;
+      background:var(--bg); color:var(--body);
+      line-height:1.55; -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1120px, calc(100% - 40px)); margin:0 auto}
+    .wordmark{font-family:'Instrument Serif',serif;font-size:28px;color:#fff}
+    .wordmark em{font-style:italic;color:var(--pink)}
+    .eyebrow{
+      font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--pink-lt);
+    }
+    h1,h2,h3{color:#fff; font-weight:800; letter-spacing:-.04em}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--pink); color:#fff; font-weight:700; font-size:14px;
+      padding:12px 22px; border-radius:10px; border:none; cursor:pointer;
+      transition:transform .15s ease, background .15s ease;
+    }
+    .btn:hover{background:#ff4d8d; transform:translateY(-1px)}
+    .btn.ghost{
+      background:transparent; border:1px solid var(--border); color:var(--body-hi); font-weight:600;
+    }
+    .btn.ghost:hover{border-color:#3a3a44; color:#fff; background:#141419}
+    .card{
+      background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:28px;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 0; border-bottom:1px solid rgba(255,255,255,.05);
+      position:sticky; top:0; backdrop-filter:blur(14px);
+      background:rgba(8,8,10,.82); z-index:20;
+    }
+    .nav .links{display:flex; gap:28px; align-items:center; font-size:14px; color:var(--body-hi)}
+    .hero{padding:88px 0 72px; position:relative; overflow:hidden}
+    .hero-orb{
+      position:absolute; right:-160px; top:-140px; width:720px; height:720px;
+      background:radial-gradient(circle at 40% 40%, rgba(255,45,120,.45), rgba(122,44,255,.2) 45%, transparent 70%);
+      filter:blur(10px); pointer-events:none;
+    }
+    .hero h1{font-size:clamp(44px, 8vw, 88px); line-height:.94; max-width:920px; position:relative}
+    .hero h1 .joy{font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--pink); letter-spacing:-.01em}
+    .hero .sub{font-size:clamp(16px, 2vw, 20px); color:var(--body-hi); max-width:540px; margin:28px 0 36px; position:relative}
+    .cta-row{display:flex; gap:14px; align-items:center; flex-wrap:wrap; position:relative}
+    .cta-note{font-size:14px; color:var(--body)}
+    .preview{
+      margin:0 0 72px; border:1px solid var(--border); border-radius:18px; overflow:hidden;
+      background:linear-gradient(180deg, #121218, #0b0b0f);
+      min-height:280px; display:grid; place-items:center; padding:28px; text-align:center;
+    }
+    .preview .fake-ui{
+      width:min(920px,100%); background:var(--panel); border:1px solid var(--border);
+      border-radius:14px; padding:18px; text-align:left;
+    }
+    .bubble{max-width:520px; border-radius:16px; padding:14px 18px; font-size:14px; margin:10px 0}
+    .bubble.user{background:#1e1520; color:#eadfe6; border:1px solid #33202c; border-bottom-right-radius:4px; margin-left:auto}
+    .bubble.agent{background:var(--panel2); color:var(--body-hi); border:1px solid var(--border); border-bottom-left-radius:4px}
+    .tools{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0}
+    .tool{
+      display:inline-flex; gap:6px; align-items:center; background:var(--panel2);
+      border:1px solid var(--border); border-radius:8px; padding:5px 10px;
+      font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--pink-lt);
+    }
+    .trio{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:0 0 88px}
+    .trio .num{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--pink-lt); display:block; margin-bottom:12px}
+    .trio h3{font-size:22px; margin-bottom:8px; letter-spacing:-.02em}
+    .trio p{font-size:15px}
+    .band{padding:88px 0; border-top:1px solid rgba(255,255,255,.05); text-align:center}
+    .band h2{font-size:clamp(32px,5vw,52px); margin-bottom:12px}
+    .band p{font-size:17px; margin-bottom:28px}
+    .how{padding:80px 0}
+    .how h2{font-size:clamp(36px,6vw,64px); margin:14px 0 18px}
+    .how > .lead{max-width:560px; color:var(--body-hi); font-size:18px; margin-bottom:48px}
+    .steps{display:grid; gap:18px}
+    .step{display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:start; padding:28px; border:1px solid var(--border); border-radius:16px; background:var(--panel)}
+    .step .n{font-family:'JetBrains Mono',monospace; color:var(--pink-lt); font-size:12px; letter-spacing:.08em}
+    .step h3{font-size:28px; margin-bottom:8px}
+    .pricing{padding:80px 0; border-top:1px solid rgba(255,255,255,.05)}
+    .pricing .intro{text-align:center; margin-bottom:40px}
+    .pricing h2{font-size:clamp(36px,6vw,64px); margin:12px 0}
+    .plans{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+    .plan{background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:36px}
+    .plan.hot{border-color:rgba(255,45,120,.55); background:var(--panel2)}
+    .plan .tag{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--pink-lt); text-transform:uppercase; letter-spacing:.1em; display:block; margin-bottom:12px}
+    .plan h3{font-size:30px; margin-bottom:10px}
+    .plan .desc{font-size:14.5px; margin-bottom:22px}
+    .plan .price{font-size:56px; font-weight:800; color:#fff; letter-spacing:-.04em}
+    .plan .price small{font-size:15px; font-weight:500; color:var(--body); letter-spacing:0}
+    .plan ul{list-style:none; margin:24px 0 28px; display:grid; gap:11px}
+    .plan li{font-size:14.5px; color:var(--body-hi); display:flex; gap:10px}
+    .plan li::before{content:"—"; color:var(--pink)}
+    .faq{padding:40px 0 80px; max-width:760px; margin:0 auto}
+    .faq h2{font-size:36px; text-align:center; margin-bottom:28px}
+    .faq-item{border-top:1px solid var(--border); padding:22px 0}
+    .faq-item b{display:block; color:#fff; font-size:16px; margin-bottom:8px}
+    footer{
+      display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+      padding:28px 0; border-top:1px solid rgba(255,255,255,.05); font-size:13px;
+    }
+    @media (max-width:900px){
+      .nav .links a:not(.btn){display:none}
+      .trio,.plans,.step{grid-template-columns:1fr}
+      .hero{padding-top:64px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <a class="wordmark" href="#top">Super<em>joy</em></a>
+      <nav class="links" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a class="btn ghost" href="#early-access">Join early access</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-orb" aria-hidden="true"></div>
+        <p class="eyebrow">Meet Superjoy</p>
+        <h1>The world's greatest <span class="joy">super&nbsp;agent</span></h1>
+        <p class="sub">Hand it the work. It keeps going until it gives you what you asked for.</p>
+        <div class="cta-row">
+          <a class="btn" href="#early-access">Get early access</a>
+          <span class="cta-note">Opening soon — come be first.</span>
+        </div>
+      </section>
+
+      <section class="preview" aria-label="Product preview">
+        <div class="fake-ui">
+          <div class="bubble user">Plan a long weekend in Asheville the last Friday of October. Two of us. We like hiking, good food, no chain hotels.</div>
+          <div class="tools"><span class="tool">◇ calendar</span><span class="tool">◇ maps</span><span class="tool">◇ web</span></div>
+          <div class="bubble agent">Done — three-day itinerary with two trailheads, a chef's-counter dinner Friday, and a family-run inn in Montford. Want the packing list too?</div>
+        </div>
+      </section>
+
+      <section class="trio" aria-label="Benefits">
+        <article class="card"><span class="num">01</span><h3>Say it plainly</h3><p>No prompt craft. Describe the outcome you want in your own words.</p></article>
+        <article class="card"><span class="num">02</span><h3>It doesn't stop</h3><p>It researches, drafts, checks and retries through every step in between.</p></article>
+        <article class="card"><span class="num">03</span><h3>You get the thing</h3><p>Finished work, not a transcript of attempts.</p></article>
+      </section>
+
+      <section class="how" id="how">
+        <p class="eyebrow">How it works</p>
+        <h2>You ask. Superjoy does the rest.</h2>
+        <p class="lead">Four real conversations, start to finish. Skills, routines, and connections keep the work moving without babysitting.</p>
+        <div class="steps">
+          <article class="step"><div class="n">01 · Skills</div><div><h3>Teach it once</h3><p>Teach Superjoy the way you like something done once. It reaches for that skill on its own next time.</p></div></article>
+          <article class="step"><div class="n">02 · Routines</div><div><h3>Work that runs without you</h3><p>Put a job on a schedule. The morning briefing arrives before you ask for it.</p></div></article>
+          <article class="step"><div class="n">03 · Connections</div><div><h3>Connected to your stack</h3><p>Connect your calendar, inbox and files. Revoke any of it from Settings whenever you want.</p></div></article>
+        </div>
+      </section>
+
+      <section class="band" id="early-access">
+        <h2>Everything you've been meaning<br>to get to. Consider it handled.</h2>
+        <p>Superjoy is opening early access. Come be first.</p>
+        <a class="btn" href="mailto:hello@getsuperjoy.com?subject=Early%20access">Get early access</a>
+      </section>
+
+      <section class="pricing" id="pricing">
+        <div class="intro">
+          <p class="eyebrow">Pricing</p>
+          <h2>Pay for the work, not the seat.</h2>
+          <p>One plan for one person. A conversation if it's a whole team.</p>
+        </div>
+        <div class="plans">
+          <article class="plan hot">
+            <span class="tag">Individual</span>
+            <h3>Hand over the day</h3>
+            <p class="desc">One plan, everything in it. Unlimited work, every tool connected, routines running on their own.</p>
+            <div class="price">$99 <small>per month</small></div>
+            <ul>
+              <li>Unlimited tasks</li>
+              <li>Every connected tool</li>
+              <li>Routines on a schedule</li>
+              <li>Custom skills</li>
+              <li>Priority speed and support</li>
+            </ul>
+            <a class="btn" href="#early-access" style="width:100%">Get early access</a>
+          </article>
+          <article class="plan">
+            <span class="tag">Team</span>
+            <h3>Everyone's agent</h3>
+            <p class="desc">Shared skills, shared routines, and the controls an organization needs.</p>
+            <div class="price" style="font-size:34px;padding:11px 0">Let's talk</div>
+            <ul>
+              <li>Everything in Individual</li>
+              <li>Shared skills library</li>
+              <li>Admin controls and audit log</li>
+              <li>SSO and provisioning</li>
+              <li>Named support</li>
+            </ul>
+            <a class="btn ghost" href="mailto:hello@getsuperjoy.com?subject=Team%20plan" style="width:100%">Contact us</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>Before you pick a plan</h2>
+        <div class="faq-item"><b>What counts as a task?</b><p>One request, however many steps it takes. Planning a trip across four tools is one task, not four.</p></div>
+        <div class="faq-item"><b>Can I cancel later?</b><p>Any time, from Settings. You keep access through the end of the month you paid for.</p></div>
+        <div class="faq-item"><b>Is my data used for training?</b><p>No. Your conversations stay yours — see the Privacy Policy for the detail.</p></div>
+        <div class="faq-item"><b>What happens after early access?</b><p>Early access pricing is locked for your first year. We will tell you well before anything changes.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="wordmark" style="font-size:18px">Super<em>joy</em></span>
+      <span>Terms of Service · Privacy Policy · getsuperjoy.com</span>
+    </footer>
+  </div>
+</body>
+</html>
